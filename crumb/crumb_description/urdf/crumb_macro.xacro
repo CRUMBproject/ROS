@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<robot name="widowx_arm" xmlns:xacro="http://ros.org/wiki/xacro">
+   <property name="M_SCALE" value="0.001"/>
+   <property name="M_PI" value="3.14159"/>
+   <xacro:include filename="$(find crumb_description)/urdf/common_materials.xacro" />
+  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <xacro:include filename="$(find crumb_description)/urdf/crumb.gazebo" />
+
+
+   <!--link name="plate_top_link"/-->
+   <!--joint name="fixed" type="fixed">
+      <parent link="plate_top_link" />
+      <child link="ph_base_link" />
+   </joint-->
+
+  <!-- Used for fixing robot to Gazebo 'base_link' -->
+
+
+   <xacro:macro name="widowx_arm" params="prefix">
+      <!-- links -->
+      <link name="${prefix}arm_base_link">
+         <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/base_link.stl"/>
+            </geometry>
+            <xacro:material_black />
+	 			 </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/base_link.stl"/>
+            </geometry>
+         </collision>
+         <inertial>
+            <origin xyz="0 0 ${M_SCALE*41.57}" rpy="0 0 0" />
+            <mass value="9.09e-1" />
+            <inertia ixx="0.002362491" ixy="0.0" ixz="0.0" iyy="0.002360673" iyz="0.0" izz="0.003550554" />
+         </inertial>
+      </link>
+
+  <joint name="fixed" type="fixed">
+    <parent link="plate_top_link"/>
+    <child link="${prefix}arm_base_link"/>
+  </joint>
+
+      <link name="${prefix}shoulder_link">
+         <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/shoulder_link.stl" />
+            </geometry>
+            <xacro:material_black />
+         </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/shoulder_link.stl"/>
+            </geometry>
+         </collision>
+         <inertial>
+            <origin xyz="0 0 ${-1*M_SCALE*36.81}" rpy="0 0 0" />
+            <mass value="2.454e-2" />
+            <inertia ixx="1.8117882e-5" ixy="0.0" ixz="0.0" iyy="1.9195188e-5" iyz="0.0" izz="3.5264e-5" />
+         </inertial>
+      </link>
+      <link name="${prefix}biceps_link">
+         <visual>
+	          <origin xyz="${M_SCALE*48.25} 0 ${M_SCALE*140}" rpy="0 0 0" />
+            <!--origin xyz="0 0 0" rpy="0 0 0" /-->
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/biceps_link.stl" />
+            </geometry>
+            <xacro:material_black />
+         </visual>
+         <collision>
+            <origin xyz="${M_SCALE*48.25} 0 ${M_SCALE*140}" rpy="0 0 0" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/biceps_link.stl" />
+            </geometry>
+         </collision>
+         <inertial>
+            <origin xyz="${1*M_SCALE*6.67} 0 ${M_SCALE*83.4}" rpy="0 0 0" />
+            <mass value="2.233e-1" />
+            <inertia ixx="6.808417e-4" ixy="0.0" ixz="0.0" iyy="7.27958e-4" iyz="0.0" izz="9.930151e-5" />
+         </inertial>
+      </link>
+      <link name="${prefix}forearm_link">
+         <visual>
+	    <origin xyz="${M_SCALE*48.25*3} 0 0" rpy="0 1.57 0" />
+	    <!--origin xyz="0 0 0" rpy="0 0 0" /-->
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/forearm_link.stl"/>
+            </geometry>
+           <xacro:material_black />
+         </visual>
+         <collision>
+	    <origin xyz="${M_SCALE*48.25*3} 0 0" rpy="0 1.57 0" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/forearm_link.stl"/>
+            </geometry>
+         </collision>
+         <inertial>
+            <origin xyz="${M_SCALE*93.72} 0 ${M_SCALE*0.018}" rpy="0 1.57 0" />
+            <mass value="1.022e-1" />
+            <inertia ixx="1.465548e-4" ixy="0.0" ixz="0.0" iyy="1.51256e-4" iyz="0.0" izz="2.857512e-5" />
+         </inertial>
+      </link>
+
+      <link name="${prefix}wrist_1_link">
+         <visual>
+            <origin xyz="0 0 0" rpy="0 1.57 0" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/wrist_1_link.stl"/>
+            </geometry>
+            <xacro:material_black />
+         </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="0 1.57 0" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/wrist_1_link.stl"/>
+            </geometry>
+         </collision>
+         <inertial>
+            <origin xyz="${M_SCALE*48.07} 0 ${M_SCALE*10.85}" rpy="0 1.57 0" />
+            <mass value="6.297e-2" />
+            <inertia ixx="1.599438e-5" ixy="0.0" ixz="0.0" iyy="2.6504073e-5" iyz="0.0" izz="2.3380761e-5" />
+         </inertial>
+      </link>
+      
+      <link name="${prefix}wrist_2_link">
+         <visual>
+            <origin xyz="${M_SCALE*43} 0 0" rpy="0 1.57 0" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/wrist_2_link.stl"/>
+            </geometry>
+            <xacro:material_black />
+         </visual>
+         <collision>
+            <origin xyz="${M_SCALE*43} 0 0" rpy="0 1.57 0" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/wrist_2_link.stl"/>
+            </geometry>
+         </collision>
+         <inertial>
+            <origin xyz="${M_SCALE*23.24} 0 ${M_SCALE*11.74}" rpy="0 1.57 0" />
+            <mass value="5.081e-2" />
+            <inertia ixx="1.0446536e-5" ixy="0.0" ixz="0.0" iyy="1.6924811e-5" iyz="0.0" izz="1.1859054e-5" />
+         </inertial>
+      </link>
+
+      <link name="${prefix}gripper_rail_link">
+         <visual>
+            <origin xyz="0 0 0" rpy="1.57 0 1.57" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/gripper_rail_link.stl"/>
+            </geometry>
+            <xacro:material_black />
+         </visual>
+         <collision>
+            <origin xyz="0 0 0" rpy="1.57 0 1.57" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/gripper_rail_link.stl"/>
+            </geometry>
+         </collision>
+         <inertial>
+            <origin xyz="0 0 ${M_SCALE*23.85}" rpy="1.57 0 1.57" />
+            <mass value="5.985e-3" />
+            <inertia ixx="3.778e-6" ixy="0.0" ixz="0.0" iyy="0.977e-6" iyz="0.0" izz="2.836e-6" />
+         </inertial>
+      </link>
+
+      <link name="${prefix}gripper_1_link">
+         <visual>
+            <origin xyz="0 -0.0035 0" rpy="1.57 0 1.57" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/gripper_hand_fixed_link.stl"/>
+            </geometry>
+            <xacro:material_black />
+         </visual>
+         <collision>
+            <origin xyz="0 -0.0035 0" rpy="1.57 0 1.57" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/gripper_hand_fixed_link.stl"/>
+            </geometry>
+         </collision>
+         <inertial>
+            <origin xyz="${M_SCALE*17.30} -0.012 0" rpy="1.57 0 1.57" />
+            <mass value="5.933e-3" />
+            <inertia ixx="1.623e-6" ixy="0.0" ixz="0.0" iyy="1.169e-6" iyz="0.0" izz="0.802e-6" />
+         </inertial>
+      </link>
+
+      <link name="${prefix}gripper_2_link">
+         <visual>
+            <origin xyz="0 0.0007 0" rpy="-1.57 0 -1.57" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/gripper_hand_fixed_link.stl"/>
+            </geometry>
+            <xacro:material_black />
+         </visual>
+         <collision>
+            <origin xyz="0 0.0007 0" rpy="-1.57 0 -1.57" />
+            <geometry>
+               <mesh filename="package://crumb_description/meshes/gripper_hand_fixed_link.stl"/>
+            </geometry>
+         </collision>
+         <inertial>
+            <origin xyz="${M_SCALE*17.30} 0.0105 0" rpy="-1.57 0 -1.57" />
+            <mass value="5.933e-3" />
+            <inertia ixx="1.623e-6" ixy="0.0" ixz="0.0" iyy="1.169e-6" iyz="0.0" izz="0.802e-6" />
+         </inertial>
+      </link>
+
+
+      <!-- joints -->
+      <!--joint name="${prefix}arm_base_joint" type="fixed">
+         <origin xyz="${M_SCALE*14.5} ${M_SCALE*0.2} ${M_SCALE*0.2}" rpy="${M_PI*0} ${M_PI*0} ${-M_PI/2}" />
+         <parent link="plate_top_link" />
+         <child link="${prefix}arm_base_link"/>
+         <axis xyz="0 1 0" />
+      </joint-->
+      <joint name="${prefix}arm_1_joint" type="revolute">
+         <origin xyz="0 0 ${M_SCALE*125}" rpy="0 0 0" />
+         <parent link="${prefix}arm_base_link" />
+         <child link="${prefix}shoulder_link" />
+         <axis xyz="0 0 1" />
+         <limit lower="${-M_PI/2}" upper="${M_PI/2}" effort="2.5" velocity="1.7453" />
+         <dynamics damping="0.005" friction="0.01"/>
+         <physics>
+            <ode>
+              <cfm_damping>1</cfm_damping>
+              <implicit_spring_damper>1</implicit_spring_damper>
+            </ode>
+         </physics>
+      </joint>
+
+      <joint name="${prefix}arm_2_joint" type="revolute">
+         <!--origin xyz="0.04825 0 0.14203" rpy="0 0 0" /-->
+         <origin xyz="0 0 0" rpy="0 0 0" />
+         <parent link="${prefix}shoulder_link" />
+         <child link="${prefix}biceps_link" />
+         <axis xyz="0 1 0" />
+         <limit lower="${-M_PI/2}" upper="${M_PI/2}" effort="6" velocity="1.7453" />
+         <dynamics damping="0.005" friction="0.01"/>
+         <physics>
+            <ode>
+              <cfm_damping>1</cfm_damping>
+              <implicit_spring_damper>1</implicit_spring_damper>
+            </ode>
+         </physics>
+      </joint>
+      
+      <joint name="${prefix}arm_3_joint" type="revolute">
+         <origin xyz="${M_SCALE*48.25} 0 ${M_SCALE*142.03}" rpy="0 0 0" />
+         <parent link="${prefix}biceps_link" />
+         <child link="${prefix}forearm_link" />
+         <axis xyz="0 -1 0" />
+         <limit lower="${-M_PI/2}" upper="${M_PI/2}" effort="2.5" velocity="1.7453" />
+         <dynamics damping="0.005" friction="0.01"/>
+         <physics>
+            <ode>
+              <cfm_damping>1</cfm_damping>
+              <implicit_spring_damper>1</implicit_spring_damper>
+            </ode>
+         </physics>
+      </joint>
+
+      <joint name="${prefix}arm_4_joint" type="revolute">
+         <origin xyz="${M_SCALE*142.03} 0 0" rpy="0 0 0" />
+         <parent link="${prefix}forearm_link" />
+         <child link="${prefix}wrist_1_link" />
+         <axis xyz="0 -1 0" />
+         <limit lower="${-M_PI/2}" upper="${M_PI/2}" effort="2.5" velocity="1.7453" />
+         <dynamics damping="0.005" friction="0.01"/>
+         <physics>
+            <ode>
+              <cfm_damping>1</cfm_damping>
+              <implicit_spring_damper>1</implicit_spring_damper>
+            </ode>
+         </physics>
+      </joint>
+
+      <joint name="${prefix}arm_5_joint" type="revolute">
+         <origin xyz="${M_SCALE*71.5} 0 0" rpy="0 0 0" />
+         <parent link="${prefix}wrist_1_link" />
+         <child link="${prefix}wrist_2_link" />
+         <axis xyz="1 0 0 " />
+         <limit lower="${-M_PI/2}" upper="${M_PI/2}" effort="1.5" velocity="1.7453" />
+         <dynamics damping="0.005" friction="0.01"/>
+         <physics>
+            <ode>
+              <cfm_damping>1</cfm_damping>
+              <implicit_spring_damper>1</implicit_spring_damper>
+            </ode>
+         </physics>
+      </joint>
+
+      <joint name="${prefix}arm_6_joint" type="fixed">
+         <origin xyz = "${M_SCALE*43} 0 0" rpy="0 0 0" />
+         <parent link="${prefix}wrist_2_link" />
+         <child link="${prefix}gripper_rail_link" />
+         <axis xyz="0 0 1" />
+         <limit lower="-0.31" upper="0.1" effort="20" velocity="0.5" />
+      </joint>
+
+      <joint name="${prefix}gripper_1_joint" type="prismatic">
+         <origin xyz="0 0 0" rpy="0 0 0" />
+         <parent link="${prefix}gripper_rail_link" />
+         <child link="${prefix}gripper_1_link" />
+         <axis xyz="0 -1 0" />
+         <limit lower="0" upper="0.0185" effort="2.5" velocity="1.7453" />
+         <dynamics damping="0.005" friction="0.01"/>
+         <physics>
+            <ode>
+              <cfm_damping>1</cfm_damping>
+              <implicit_spring_damper>1</implicit_spring_damper>
+            </ode>
+         </physics>
+      </joint>
+
+      <joint name="${prefix}gripper_2_joint" type="prismatic">
+         <origin xyz="0 0 0" rpy="0 0 0" />
+         <parent link="${prefix}gripper_rail_link" />
+         <child link="${prefix}gripper_2_link" />
+         <mimic joint="${prefix}gripper_1_joint" />
+         <axis xyz="0 1 0" />
+         <limit lower="0" upper="0.0185" effort="2.5" velocity="1.7453" />
+         <dynamics damping="0.005" friction="0.01"/>
+         <physics>
+            <ode>
+              <cfm_damping>1</cfm_damping>
+              <implicit_spring_damper>1</implicit_spring_damper>
+            </ode>
+         </physics>
+      </joint>
+
+
+
+
+   </xacro:macro>
+
+  <transmission name="tran1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_1_joint">
+	<hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+ <transmission name="tran2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_2_joint">
+	<hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor2">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+ <transmission name="tran3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_3_joint">
+	<hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor3">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+ <transmission name="tran4">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_4_joint">
+	<hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor4">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+ <transmission name="tran5">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_5_joint">
+	<hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor5">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+ <transmission name="tran6">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="gripper_1_joint">
+	<hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor6">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+</robot>

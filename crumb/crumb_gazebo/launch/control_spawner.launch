@@ -1,0 +1,16 @@
+<launch>
+
+<!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+	output="screen" args="joint_state_controller
+					  arm_1_joint
+					  arm_2_joint
+					  arm_3_joint
+					  gripper_1_joint
+					  arm_4_joint
+					  arm_5_joint"/>
+
+
+
+
+</launch>

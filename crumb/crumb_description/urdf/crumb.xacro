@@ -1,0 +1,13 @@
+
+<robot name="widowx_arm" xmlns:xacro="http://ros.org/wiki/xacro">
+	<xacro:include filename="$(find crumb_description)/urdf/crumb_macro.xacro"/>
+	<xacro:widowx_arm prefix=""/>
+
+  <xacro:include filename="$(find crumb_description)/urdf/turtlebot_library_crumb.urdf.xacro"/>
+
+  <kobuki_crumb/>
+  <stack_hexagons parent="base_link"/>
+  <sensor_kinect_crumb  parent="base_link"/>
+
+
+</robot>

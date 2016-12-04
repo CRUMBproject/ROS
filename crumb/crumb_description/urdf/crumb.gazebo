@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<robot>
+
+  <!-- ros_control plugin -->
+<gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <!--robotNamespace>/widowx_arm</robotNamespace -->
+    <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+  </plugin>
+</gazebo>
+
+<!--  <gazebo>
+    <plugin name="joint_state_publisher" filename="libgazebo_ros_joint_state_publisher.so">
+      <jointName>arm_1_joint, arm_2_joint, arm_3_joint, gripper_1_joint, arm_4_joint, arm_5_joint</jointName>
+    </plugin>
+  </gazebo>
+-->
+
+  <!-- mimic_joint plugin -->
+<gazebo>
+  <plugin name="MimicJointPlugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+    <joint>gripper_1_joint</joint>
+    <mimicJoint>gripper_2_joint</mimicJoint>
+  </plugin>
+</gazebo>
+
+<gazebo>
+  <gripper name="gripper">
+    <grasp_check>
+      <attach_steps>5</attach_steps>
+      <detach_steps>5</detach_steps>
+    </grasp_check>
+    <gripper_link>gripper_1_link</gripper_link>
+    <gripper_link>gripper_2_link</gripper_link>
+    <palm_link>gripper_rail_link</palm_link>
+  </gripper>
+</gazebo>
+
+<!-- Link1 -->
+  <gazebo reference="arm_base_link">
+    <selfCollide>true</selfCollide>
+
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="shoulder_link">
+    <selfCollide>true</selfCollide>
+
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="biceps_link">
+    <selfCollide>true</selfCollide>
+
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="forearm_link">
+    <selfCollide>true</selfCollide>
+
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="wrist_1_link">
+    <selfCollide>true</selfCollide>
+
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="wrist_2_link">
+    <selfCollide>true</selfCollide>
+
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="gripper_rail_link">
+    <selfCollide>true</selfCollide>
+
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="gripper_1_link">
+    <selfCollide>true</selfCollide>
+
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kd>1.5</kd>
+    <kp>1.5</kp>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="gripper_2_link">
+    <selfCollide>true</selfCollide>
+
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kd>1.5</kd>
+    <kp>1.5</kp>
+    <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="link_box_3">
+    <selfCollide>true</selfCollide>
+
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kd>1.5</kd>
+    <kp>1.5</kp>
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="link_box_4">
+    <selfCollide>true</selfCollide>
+
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kd>1.5</kd>
+    <kp>1.5</kp>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="link_box_1">
+    <selfCollide>true</selfCollide>
+
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kd>1.5</kd>
+    <kp>1.5</kp>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="link_box_2">
+    <selfCollide>true</selfCollide>
+
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kd>1.5</kd>
+    <kp>1.5</kp>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+  <gazebo reference="link_box_3_0">
+    <selfCollide>true</selfCollide>
+
+    <mu1>0.5</mu1>
+    <mu2>0.5</mu2>
+    <kd>1.5</kd>
+    <kp>1.5</kp>
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+
+
+</robot>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
